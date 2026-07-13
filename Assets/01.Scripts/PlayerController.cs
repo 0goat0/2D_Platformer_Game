@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
         GroundCheck();
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.isPressed)
         {
             Jump();
         }
@@ -44,7 +44,10 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
+        if(isGround==false)
+            return;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+        isGround = false;
     }
     void GroundCheck()
     {
@@ -54,9 +57,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(transform.position - new Vector3(0, 0.3f, 0), 0.3f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawSphere(transform.position - new Vector3(0, 0.3f, 0), 0.3f);
+    //}
 }
 

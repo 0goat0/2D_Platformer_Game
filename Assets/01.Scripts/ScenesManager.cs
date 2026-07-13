@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-    public void OnstartClick()
+    public void OnStartClick()
     {
         SceneManager.LoadScene("Stage1");
     }
@@ -14,13 +14,13 @@ public class ScenesManager : MonoBehaviour
 #endif
         Application.Quit();
     }
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Escape))
-            GameQuit();
-    }
-    public void GameQuit()
-    {
-        Application.Quit();
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKey(KeyCode.Escape))
+    //        GameQuit();
+    //}
+    //public void GameQuit()
+    //{
+    //    Application.Quit();
+    //}
 }

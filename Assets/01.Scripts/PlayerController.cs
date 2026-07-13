@@ -3,51 +3,60 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rb;
+    Rigidbody2D rb;
     Collider2D col;
-    Vector2 dir;
-    //public float moveSpeed;
+
+    float dir;
+    bool isGround;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpPower;
 
     [SerializeField] LayerMask groundLayer;
 
-    bool isGround;
+    
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
     private void Update()
     {
-        dir = Vector2.zero;
 
-        if (Keyboard.current.wKey.isPressed)
-        {
-            dir = Vector2.up;
-        }
-        if (Keyboard.current.dKey.isPressed)
-        {
-            dir = Vector2.down;
-        }
+        dir = 0;
         if (Keyboard.current.aKey.isPressed)
-        {
-            dir = Vector2.left;
-        }
+            dir += -1;
         if (Keyboard.current.dKey.isPressed)
+            dir += 1;
+
+        GroundCheck();
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            dir = Vector2.right;
+            Jump();
         }
     }
-
-    public void GroundCheck()
+    private void FixedUpdate()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, 0.8f, groundLayer);
+        rb.linearVelocity=new Vector2(dir*moveSpeed,rb.linearVelocity.y);
+    }
+
+    void Jump()
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+    }
+    void GroundCheck()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, 0.3f, groundLayer);
 
         isGround = hit.collider == null ? false : true;
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position - new Vector3(0, 0.3f, 0), 0.3f);
     }
 }
 

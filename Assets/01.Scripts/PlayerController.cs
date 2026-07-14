@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour
 
     float dir;
     bool isGround;
+    //bool isRightWall;
+    //bool isLeftWall;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpPower;
 
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask wallLayer;
 
     
 
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
             dir += 1;
 
         GroundCheck();
+
 
         if (Keyboard.current.spaceKey.isPressed)
         {
@@ -57,9 +61,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //void WallChaeck()
+    //{
+    //    RaycastHit2D hitRight = Physics2D.CircleCast(transform.position, 0.3f, Vector2.right, wallLayer);
+    //    isRightWall = hitRight.collider == null ? false : true;
+
+    //    RaycastHit2D hitLeft=Physics2D.CircleCast(transform.position,0.3f,Vector2.left, wallLayer);
+    //    isLeftWall = hitLeft.collider == null ? false :true;
+  
+    //}
+
     //private void OnDrawGizmos()
     //{
     //    Gizmos.DrawSphere(transform.position - new Vector3(0, 0.3f, 0), 0.3f);
     //}
+
+
 }
 

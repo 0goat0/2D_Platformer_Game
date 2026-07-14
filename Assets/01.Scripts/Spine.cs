@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spine : MonoBehaviour
+public class Spine : Obstacle
 {
     
 
@@ -8,13 +8,13 @@ public class Spine : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag== "Player")
-        {
-            Debug.Log("데미지");
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if(collision.gameObject.tag== "Player")
+    //    {
+    //        Debug.Log("데미지");
+    //    }
+    //}
 
 
 }

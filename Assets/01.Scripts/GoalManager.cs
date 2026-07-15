@@ -1,14 +1,15 @@
 using UnityEngine;
 
-public class GoalObject : MonoBehaviour
+public class GoalManager : MonoBehaviour
 {
+    Collider2D col;
 
     void Start()
     {
-        
+        col = GetComponent<Collider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag=="Player")
         {

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     float dir;
     bool isGround;
-    public Coin cn;
+    public CoinManager cn;
     public Heart ht;
     //bool isRightWall;
     //bool isLeftWall;
@@ -83,12 +83,6 @@ public class PlayerController : MonoBehaviour
 
             }
         }
-
-        if (collision.gameObject.tag == "Goal")
-        {
-
-        }
-        
     }
 
     private void FixedUpdate()
@@ -119,10 +113,6 @@ public class PlayerController : MonoBehaviour
         isGround = hit.collider == null ? false : true;
 
     }
-
-
-
-
     void GameOver()
     {
 

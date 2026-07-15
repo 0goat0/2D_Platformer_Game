@@ -9,7 +9,7 @@ public class StageManager : MonoBehaviour
 
     Rigidbody2D playerRb;
 
-    int deadCount;
+    int score;
 
     private void Awake()
     {
@@ -25,8 +25,8 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
-        deadCount = 0;
-        UIManager.instance.ChangeDeadCountText(deadCount);
+        score = 0;
+
         
     }
 

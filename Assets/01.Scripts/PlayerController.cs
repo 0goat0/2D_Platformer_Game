@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
 
     float dir;
     bool isGround;
-    public Coin ci;
+    public Coin cn;
+    public Heart ht;
     //bool isRightWall;
     //bool isLeftWall;
 
@@ -22,11 +23,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField][Range(0f, 1f)] float jumpSpeed;
 
-    private int lifes = 3;
+    public int maxHeart = 3;
+    private int currentHeart;
+    public UIManager heartUI;
 
     public BoxCollider2D PlayerCollider;
     void Start()
     {
+        currentHeart = maxHeart;
+        heartUI.SetMaxHearts(maxHeart);
+
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
@@ -51,13 +57,14 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Coin")
         {
-            ci.coinCount++;
+            cn.coinCount++;
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Heart")
         {
-            Heal();
+            ht.heartCount++;
             Destroy(collision.gameObject);
+            Heal();
         }
         if (collision.gameObject.tag == "Enemy")
         {
@@ -65,7 +72,11 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Spine")
         {
-            Hit();
+            Spine spine = collision.gameObject.GetComponent<Spine>();
+            if (spine)
+            {
+                Hit(spine.hit);
+            }
         }
         if (collision.gameObject.tag == "Goal")
         {
@@ -101,22 +112,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Hit()
+    void Hit(int hit)
     {
-        lifes -= 1;
-        if(lifes==0)
+        currentHeart -= hit;
+        heartUI.UpdateHearts(currentHeart);
+        if(currentHeart == 0)
         {
-            DeadPlayer();
+            //GameOver();
         }
+  
     }
     void Heal()
     {
-        lifes = Mathf.Min(3, lifes + 1);
+        maxHeart = Mathf.Min(3, maxHeart + 1);
         
     }
-    void DeadPlayer()
+    void GameOver()
     {
-        col.enabled= false;
 
     }
 

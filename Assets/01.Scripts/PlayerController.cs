@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     float dir;
     bool isGround;
+    public Coin ci;
     //bool isRightWall;
     //bool isLeftWall;
 
@@ -50,7 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Coin")
         {
-            //Destroy(collision.gameObject);
+            ci.coinCount++;
+            Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Heart")
         {
@@ -117,6 +119,7 @@ public class PlayerController : MonoBehaviour
         col.enabled= false;
 
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position - new Vector3(0, 0.3f, 0), 0.3f);

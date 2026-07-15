@@ -9,7 +9,6 @@ public class StageManager : MonoBehaviour
 
     Rigidbody2D playerRb;
 
-    int score;
 
     private void Awake()
     {
@@ -25,9 +24,6 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
-        score = 0;
-
-        
     }
 
     // Update is called once per frame

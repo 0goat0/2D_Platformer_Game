@@ -1,5 +1,6 @@
 using System;
 using Unity.Mathematics.Geometry;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,15 +24,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField][Range(0f, 1f)] float jumpSpeed;
 
-    public int maxHeart = 3;
-    private int currentHeart;
-    public UIManager heartUI;
+    public HealthManager maxHeart;
 
-    public BoxCollider2D PlayerCollider;
     void Start()
     {
-        currentHeart = maxHeart;
-        heartUI.SetMaxHearts(maxHeart);
+        //currentHeart = maxHeart;
+        //heartUI.SetMaxHearts(maxHeart);
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -62,27 +60,37 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Heart")
         {
-            ht.heartCount++;
-            Destroy(collision.gameObject);
-            Heal();
-        }
-        if (collision.gameObject.tag == "Enemy")
-        {
-
-        }
-        if (collision.gameObject.tag == "Spine")
-        {
-            Spine spine = collision.gameObject.GetComponent<Spine>();
-            if (spine)
+            if(HealthManager.heart<3)
             {
-                Hit(spine.hit);
+                HealthManager.heart++;
+                Destroy(collision.gameObject);
+                //Heal();
+            }
+            else
+            {
+                Destroy(collision.gameObject);
             }
         }
+        if(collision.gameObject.tag =="Spine")
+        {
+            HealthManager.heart--;
+            if(HealthManager.heart <= 0)
+            {
+                //game over
+            }
+            else
+            {
+
+            }
+        }
+
         if (collision.gameObject.tag == "Goal")
         {
 
         }
+        
     }
+
     private void FixedUpdate()
     {
         if(isGround)
@@ -91,8 +99,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            float jp =dir * moveSpeed;
-            float newJp = Mathf.MoveTowards(rb.linearVelocity.x, jp, moveSpeed * jumpSpeed * Time.fixedDeltaTime * 10f);
+            float js =dir * moveSpeed;
+            float newJp = Mathf.MoveTowards(rb.linearVelocity.x, js, moveSpeed * jumpSpeed * Time.fixedDeltaTime * 10f);
             rb.linearVelocity =new Vector2(newJp, rb.linearVelocity.y);
         }
     }
@@ -112,21 +120,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Hit(int hit)
-    {
-        currentHeart -= hit;
-        heartUI.UpdateHearts(currentHeart);
-        if(currentHeart == 0)
-        {
-            //GameOver();
-        }
-  
-    }
-    void Heal()
-    {
-        maxHeart = Mathf.Min(3, maxHeart + 1);
-        
-    }
+
+
+
     void GameOver()
     {
 

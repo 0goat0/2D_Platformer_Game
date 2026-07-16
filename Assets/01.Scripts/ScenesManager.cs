@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
@@ -14,6 +15,17 @@ public class ScenesManager : MonoBehaviour
 #endif
         Application.Quit();
     }
+    //public void OnPause()
+    //{
+    //    if(Keyboard.current.escapeKey.isPressed)
+    //    {
+    //        Time.timeScale = 0;
+    //    }
+        
+    //}
+
+
+
     //private void Update()
     //{
     //    if (Input.GetKey(KeyCode.Escape))

@@ -23,12 +23,13 @@ public class HealthManager : MonoBehaviour
         {
             hearts[i].sprite = maxHeart;
         }
+        if(heart<=0)
+        {
+            heart = 0;
+        }
     }
 
-    public void UpdateScore()
-    {
 
-    }
 
 
 

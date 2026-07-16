@@ -1,15 +1,40 @@
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+
+
 
 public class GameManager : MonoBehaviour
 {
-    int progressAmount;
-    public Slider progressSlider;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    Rigidbody2D rb;
+    public static GameManager instance;
+    Vector2 startPos;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+            
+        
+        else
+        {
+            Destroy(gameObject);  //두번째 생성된거는 파괴한다
+            return;
+        }
+    }
+
     void Start()
     {
-        progressAmount = 0;
-        progressSlider.value = 0;
+        rb = GetComponent<Rigidbody2D>();
+        if (PlayerController.instance != null)
+        {
+            startPos = PlayerController.instance.transform.position;
+        }
+        
 
     }
 
@@ -18,6 +43,40 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    #region
+    //public void GameStart()
+    //{
+    //    state = GameState.Playing;
+    //    Time.timeScale = 1;
+    //}
+    //public void GameOver()
+    //{
+    //    Debug.Log("게임오버");
+    //    state= GameState.GameOver;
+    //}
+    //public void GamePause()
+    //{
+    //    state= GameState.Pause;
+    //    Time.timeScale = 0;    // 시간클래스에서 timeScale 속도를 0으로
+    //                           // timeScale 2이면 x2
+    //}
+    //void Respawn()
+    //{
+    //    transform.position = startPos;
+    //}
+    #endregion
+    public void Die()
+    {
+        Respawn();
+    }
+    public void Respawn()
+    {
+        HealthManager.heart = 3;
 
-
+        if(PlayerController.instance != null )
+        {
+            PlayerController.instance.transform.position = startPos;
+            PlayerController.instance.RespawnMove();
+        }
+    }
 }

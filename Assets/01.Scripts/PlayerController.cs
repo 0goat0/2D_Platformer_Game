@@ -3,16 +3,20 @@ using Unity.Mathematics.Geometry;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Collider2D col;
 
+    public static PlayerController instance;
     float dir;
     bool isGround;
-    public CoinManager cn;
-    public Heart ht;
+    public CoinManager cm;
+    public GameManager game;
+
+    //public Heart ht;
     //bool isRightWall;
     //bool isLeftWall;
 
@@ -24,13 +28,29 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField][Range(0f, 1f)] float jumpSpeed;
 
-    public HealthManager maxHeart;
+    [SerializeField] Transform player;
+    [SerializeField] Transform respawnPoint;
+
+    Rigidbody2D playerRb;
+
+    //public HealthManager maxHeart;
+    private void Awake()
+    {
+        if(instance==null)
+            instance = this;
+        else
+        {
+            Destroy(instance);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
         //currentHeart = maxHeart;
         //heartUI.SetMaxHearts(maxHeart);
-
+        playerRb = GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
@@ -51,11 +71,13 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Coin")
         {
-            cn.coinCount++;
+
+            cm.coinCount++;
+            Debug.Log("∏‘¿Ω");
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Heart")
@@ -76,7 +98,7 @@ public class PlayerController : MonoBehaviour
             HealthManager.heart--;
             if(HealthManager.heart <= 0)
             {
-                //game over
+                GameManager.instance.Die();
             }
             else
             {
@@ -96,6 +118,7 @@ public class PlayerController : MonoBehaviour
             float js =dir * moveSpeed;
             float newJp = Mathf.MoveTowards(rb.linearVelocity.x, js, moveSpeed * jumpSpeed * Time.fixedDeltaTime * 10f);
             rb.linearVelocity =new Vector2(newJp, rb.linearVelocity.y);
+
         }
     }
 
@@ -113,11 +136,14 @@ public class PlayerController : MonoBehaviour
         isGround = hit.collider == null ? false : true;
 
     }
-    void GameOver()
+    public void RespawnMove()
     {
-
+        dir = 0;
+        if(rb!=null)
+        {
+            rb.linearVelocity=Vector2.zero;
+        }    
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position - new Vector3(0, 0.3f, 0), 0.3f);

@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
             cm.coinCount++;
             Debug.Log("∏‘¿Ω");
             Destroy(collision.gameObject);
+          
             
         }
         if (collision.gameObject.tag == "Heart")
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Destroy(collision.gameObject);
+                
             }
         }
         if(collision.gameObject.tag =="Spine")

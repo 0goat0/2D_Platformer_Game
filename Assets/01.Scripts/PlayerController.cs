@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
             cm.coinCount++;
             Debug.Log("∏‘¿Ω");
             Destroy(collision.gameObject);
+            
         }
         if (collision.gameObject.tag == "Heart")
         {
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
         }
         if(collision.gameObject.tag =="Spine")
         {
-            HealthManager.heart--;
+            HealthManager.heart=Mathf.Max(0,HealthManager.heart-1);
             if(HealthManager.heart <= 0)
             {
                 GameManager.instance.Die();

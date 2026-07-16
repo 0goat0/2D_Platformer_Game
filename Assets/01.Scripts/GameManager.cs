@@ -9,23 +9,21 @@ public class GameManager : MonoBehaviour
 {
     Rigidbody2D rb;
     public static GameManager instance;
+    public CoinManager cm;
     Vector2 startPos;
-
     private void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-            
-        
         else
         {
-            Destroy(gameObject);  //두번째 생성된거는 파괴한다
+            Destroy(instance);
             return;
         }
+        DontDestroyOnLoad(gameObject);
     }
+
+
 
     void Start()
     {
@@ -73,10 +71,11 @@ public class GameManager : MonoBehaviour
     {
         HealthManager.heart = 3;
 
-        if(PlayerController.instance != null )
+        if (PlayerController.instance != null)
         {
             PlayerController.instance.transform.position = startPos;
             PlayerController.instance.RespawnMove();
         }
+        
     }
 }

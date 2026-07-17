@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     Rigidbody2D rb;
     public static GameManager instance;
     public CoinManager cm;
+    public ScenesManager scenes;
     Vector2 startPos;
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        
     }
 
 
@@ -63,17 +64,17 @@ public class GameManager : MonoBehaviour
     #endregion
     public void Die()
     {
-        Respawn();
+        scenes.GameOver();
     }
-    public void Respawn()
-    {
-        HealthManager.heart = 3;
+    //public void Respawn()
+    //{
+    //    HealthManager.heart = 3;
 
-        if (PlayerController.instance != null)
-        {
-            PlayerController.instance.transform.position = startPos;
-            PlayerController.instance.RespawnMove();
-        }
+    //    if (PlayerController.instance != null)
+    //    {
+    //        PlayerController.instance.transform.position = startPos;
+    //        PlayerController.instance.RespawnMove();
+    //    }
         
-    }
+    //}
 }

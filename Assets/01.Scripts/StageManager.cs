@@ -19,7 +19,7 @@ public class StageManager : MonoBehaviour
             Destroy(instance);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        
     }
     void Start()
     {

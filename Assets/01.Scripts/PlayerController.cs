@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
             Destroy(instance);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     void Start()

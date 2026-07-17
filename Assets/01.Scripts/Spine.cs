@@ -21,14 +21,10 @@ public class Spine : Obstacle
     {
         if (collider2D.gameObject.tag == "Player")
         {
-                Hit(hit);
+
         }
     }
-    void Hit(int hit)
-    {
-        
 
-    }
 
 
 }

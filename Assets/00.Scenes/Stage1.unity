@@ -1793,7 +1793,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1012874634}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1624033486}
+        m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
+        m_MethodName: OnExitClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1012874634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2245,7 +2257,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1077560474}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1624033486}
+        m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1077560474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2374,6 +2398,7 @@ GameObject:
   - component: {fileID: 1156861419}
   - component: {fileID: 1156861421}
   - component: {fileID: 1156861420}
+  - component: {fileID: 1156861422}
   m_Layer: 5
   m_Name: GameOverScreen
   m_TagString: Untagged
@@ -2441,6 +2466,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156861418}
   m_CullTransparentMesh: 1
+--- !u!114 &1156861422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156861418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe64fc343867469429c66bbb75c3cdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScenesManager
+  gameOverUI: {fileID: 1156861418}
 --- !u!1001 &1160053857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4029,7 +4067,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1402905478}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1624033486}
+        m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1402905478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4771,6 +4821,7 @@ GameObject:
   - component: {fileID: 1624033484}
   - component: {fileID: 1624033483}
   - component: {fileID: 1624033485}
+  - component: {fileID: 1624033486}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4821,6 +4872,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   cm: {fileID: 1624033483}
+  scenes: {fileID: 1156861422}
+--- !u!114 &1624033486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624033482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe64fc343867469429c66bbb75c3cdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScenesManager
+  gameOverUI: {fileID: 1156861418}
 --- !u!1 &1676312786
 GameObject:
   m_ObjectHideFlags: 0
@@ -8281,6 +8346,7 @@ MonoBehaviour:
   - {fileID: 1705162875}
   maxHeart: {fileID: 4060682636331337571, guid: 1b39c0fe73f0433468e25eb21cfde7c2, type: 3}
   emptyheart: {fileID: -5244482664123065748, guid: 1b39c0fe73f0433468e25eb21cfde7c2, type: 3}
+  sm: {fileID: 1624033486}
 --- !u!114 &1753211799
 MonoBehaviour:
   m_ObjectHideFlags: 0

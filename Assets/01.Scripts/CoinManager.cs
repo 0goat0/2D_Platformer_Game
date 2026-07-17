@@ -16,7 +16,10 @@ public class CoinManager : MonoBehaviour
 
     void Start()
     {
-        
+        //if(coinText != null)
+        //{
+        //    FindCoinText();
+        //}
     }
 
     private void Update()
@@ -28,5 +31,9 @@ public class CoinManager : MonoBehaviour
             Destroy(door);
         }
     }
+    //private void FindCoinText()
+    //{
+    //    coinText = FindObjectOfType<TextMeshProUGUI>();
+    //}
 
 }

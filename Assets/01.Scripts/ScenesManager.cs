@@ -1,14 +1,41 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class ScenesManager : MonoBehaviour
 {
-    public void OnStartClick()
+    public GameObject gameOverUI;
+    private void Update()
+    {
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (HealthManager.heart <= 0)
+            {
+                return;
+            } 
+
+            if (Time.timeScale == 0f)
+            {
+                Pause();
+            }
+            else
+            {
+                GameOver();
+            }
+        }
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("StartScenes");
+        Time.timeScale = 1;
+    }
+    public void StartClick()
     {
         SceneManager.LoadScene("Stage1");
     }
-    public void OnExitClick()
+    public void ExitClick()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -16,24 +43,27 @@ public class ScenesManager : MonoBehaviour
 #endif
         Application.Quit();
     }
-    //public void OnPause()
-    //{
-    //    if(Keyboard.current.escapeKey.isPressed)
-    //    {
-    //        Time.timeScale = 0;
-    //    }
-        
-    //}
+    public void GameOver()
+    {
+        gameOverUI.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void Pause()
+    {
+        if (HealthManager.heart >= 0)
+        {
+            if (gameOverUI != null)
+            {
+                gameOverUI.SetActive(false);
+            }
+            Time.timeScale = 1f;
+        }
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
 
 
-
-    //private void Update()
-    //{
-    //    if (Input.GetKey(KeyCode.Escape))
-    //        GameQuit();
-    //}
-    //public void GameQuit()
-    //{
-    //    Application.Quit();
-    //}
 }

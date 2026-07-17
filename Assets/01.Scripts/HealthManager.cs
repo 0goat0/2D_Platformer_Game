@@ -11,6 +11,14 @@ public class HealthManager : MonoBehaviour
     public Sprite maxHeart;
     public Sprite emptyheart;
 
+    public ScenesManager sm;
+    private bool isDead;
+
+    private void Start()
+    {
+        heart = 3;
+    }
+
     void Update()
     {
         foreach (Image img in hearts)
@@ -23,8 +31,10 @@ public class HealthManager : MonoBehaviour
         {
             hearts[i].sprite = maxHeart;
         }
-        if(heart<=0)
+        if(heart<=0 && !isDead)
         {
+            isDead= true;
+            sm.GameOver();
             heart = 0;
         }
     }

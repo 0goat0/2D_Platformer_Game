@@ -21,9 +21,6 @@ public class GameManager : MonoBehaviour
         }
         
     }
-
-
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,8 +28,6 @@ public class GameManager : MonoBehaviour
         {
             startPos = PlayerController.instance.transform.position;
         }
-        
-
     }
 
     // Update is called once per frame
@@ -66,15 +61,5 @@ public class GameManager : MonoBehaviour
     {
         scenes.GameOver();
     }
-    //public void Respawn()
-    //{
-    //    HealthManager.heart = 3;
 
-    //    if (PlayerController.instance != null)
-    //    {
-    //        PlayerController.instance.transform.position = startPos;
-    //        PlayerController.instance.RespawnMove();
-    //    }
-        
-    //}
 }

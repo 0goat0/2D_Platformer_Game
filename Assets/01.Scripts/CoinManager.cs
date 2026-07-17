@@ -9,19 +9,6 @@ public class CoinManager : MonoBehaviour
     public GameObject door;
     private bool doorDestroyed;
 
-
-
-
-
-
-    void Start()
-    {
-        //if(coinText != null)
-        //{
-        //    FindCoinText();
-        //}
-    }
-
     private void Update()
     {
         coinText.text = ": " + coinCount.ToString();

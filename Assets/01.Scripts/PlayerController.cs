@@ -28,9 +28,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField][Range(0f, 1f)] float jumpSpeed;
 
-    [SerializeField] Transform player;
-    [SerializeField] Transform respawnPoint;
-
     Rigidbody2D playerRb;
 
     //public HealthManager maxHeart;

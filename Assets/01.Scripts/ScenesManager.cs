@@ -31,10 +31,7 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene("StartScenes");
         Time.timeScale = 1;
     }
-    public void StartClick()
-    {
-        SceneManager.LoadScene("Stage1");
-    }
+    public void StartClick()=> SceneManager.LoadScene("Stage1");
     public void ExitClick()
     {
 #if UNITY_EDITOR

@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (PlayerController.instance != null)
+        if (PlayerController2.instance != null)
         {
-            startPos = PlayerController.instance.transform.position;
+            startPos = PlayerController2.instance.transform.position;
         }
     }
 

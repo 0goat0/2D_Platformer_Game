@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
     Rigidbody2D rb;
     Collider2D col;
 
-    public static PlayerController instance;
+    public static PlayerController2 instance;
     float dir;
     bool isGround;
     public CoinManager cm;

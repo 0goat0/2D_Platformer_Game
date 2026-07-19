@@ -8,6 +8,7 @@ TagManager:
   - Heart
   - Spine
   - Goal
+  - Planet
   layers:
   - Default
   - TransparentFX

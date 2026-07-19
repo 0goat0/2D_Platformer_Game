@@ -405,37 +405,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &117964840
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 117964841}
-  m_Layer: 0
-  m_Name: RespawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &117964841
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117964840}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.3, y: -2.36, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &146059653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1019,7 +988,7 @@ GameObject:
   - component: {fileID: 817300193}
   - component: {fileID: 817300192}
   - component: {fileID: 817300191}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1796,7 +1765,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1624033486}
         m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
-        m_MethodName: OnExitClick
+        m_MethodName: ExitClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2236,7 +2205,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0.33333334}
-    m_HighlightedColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.6862745}
+    m_HighlightedColor: {r: 0.7019608, g: 0.7019608, b: 0.7019608, a: 0.6862745}
     m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0.53333336}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
@@ -4046,7 +4015,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0.33333334}
-    m_HighlightedColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.6862745}
+    m_HighlightedColor: {r: 0.7019608, g: 0.7019608, b: 0.7019608, a: 0.6862745}
     m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0.53333336}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5019608}
@@ -8916,8 +8885,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   jumpSpeed: 0.06
-  player: {fileID: 2063724791}
-  respawnPoint: {fileID: 117964841}
 --- !u!50 &2063724789
 Rigidbody2D:
   serializedVersion: 5
@@ -9312,4 +9279,3 @@ SceneRoots:
   - {fileID: 1551984411}
   - {fileID: 1107602728}
   - {fileID: 1624033484}
-  - {fileID: 117964841}

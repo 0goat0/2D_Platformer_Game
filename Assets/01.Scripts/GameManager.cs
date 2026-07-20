@@ -24,10 +24,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (PlayerController2.instance != null)
-        {
-            startPos = PlayerController2.instance.transform.position;
-        }
+        startPos = PlayerController.instance.transform.position;
+
+
     }
 
     // Update is called once per frame

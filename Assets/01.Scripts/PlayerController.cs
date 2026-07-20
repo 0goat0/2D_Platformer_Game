@@ -1,16 +1,14 @@
 using System;
-using Unity.Mathematics.Geometry;
-using System.Collections;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
-public class PlayerController2 : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Collider2D col;
 
-    public static PlayerController2 instance;
+    public static PlayerController instance;
     float dir;
     bool isGround;
     public CoinManager cm;
@@ -22,6 +20,7 @@ public class PlayerController2 : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpPower;
+
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask wallLayer;
@@ -45,15 +44,14 @@ public class PlayerController2 : MonoBehaviour
 
     void Start()
     {
-        //currentHeart = maxHeart;
-        //heartUI.SetMaxHearts(maxHeart);
         playerRb = GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+
     }
     private void Update()
     {
-
+        
         dir = 0;
         if (Keyboard.current.aKey.isPressed)
             dir += -1;
@@ -62,12 +60,12 @@ public class PlayerController2 : MonoBehaviour
 
         GroundCheck();
 
-
         if (Keyboard.current.spaceKey.isPressed)
         {
             Jump();
         }
     }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Coin")
@@ -123,10 +121,11 @@ public class PlayerController2 : MonoBehaviour
 
     void Jump()
     {
-        if(isGround==false)
-            return;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-        isGround = false;
+        if(isGround==false) return;
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            isGround = false;
+        }
     }
     void GroundCheck()
     {
@@ -135,6 +134,11 @@ public class PlayerController2 : MonoBehaviour
         isGround = hit.collider == null ? false : true;
 
     }
+    private void WhenGround(Transform ground)
+    {
+        transform.SetParent(ground);
+    }
+
     public void RespawnMove()
     {
         dir = 0;
@@ -143,6 +147,8 @@ public class PlayerController2 : MonoBehaviour
             rb.linearVelocity=Vector2.zero;
         }    
     }
+   
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(transform.position - new Vector3(0, 0.3f, 0), 0.3f);

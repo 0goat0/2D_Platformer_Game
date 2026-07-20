@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using Unity.VisualScripting;
 
 public class ScenesManager : MonoBehaviour
 {
@@ -49,10 +47,7 @@ public class ScenesManager : MonoBehaviour
     {
         if (HealthManager.heart >= 0)
         {
-            if (gameOverUI != null)
-            {
-                gameOverUI.SetActive(false);
-            }
+            gameOverUI.SetActive(false);
             Time.timeScale = 1f;
         }
     }

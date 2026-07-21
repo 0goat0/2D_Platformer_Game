@@ -4,7 +4,26 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
+    public static ScenesManager instance;
     public GameObject gameOverUI;
+    //public GameObject gameClearUI;
+
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+            
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //        return;
+    //    }
+
+    //}
+
     private void Update()
     {
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -56,6 +75,10 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
+    //public void GameClear()
+    //{
+    //    gameClearUI.SetActive(true);
+    //}
 
 
 }

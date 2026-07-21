@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,17 +9,19 @@ public class PlayerController : MonoBehaviour
     Collider2D col;
 
     public static PlayerController instance;
-    float dir;
+    Vector3 dir;
+
     bool isGround;
     public CoinManager cm;
     public GameManager game;
 
-    //public Heart ht;
-    //bool isRightWall;
-    //bool isLeftWall;
+
 
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpPower;
+
+    public float maxSlopeAngle = 45f;
+
 
 
     [SerializeField] LayerMask groundLayer;
@@ -29,17 +31,17 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D playerRb;
 
-    //public HealthManager maxHeart;
+    public Rigidbody2D.SlideMovement SlideMovement=new Rigidbody2D.SlideMovement();
+    public Rigidbody2D.SlideResults SlideResults;
+
+    public float HorizontalSpeed = 2f;
+
     private void Awake()
     {
-        if(instance==null)
+        if(instance == null)
             instance = this;
         else
-        {
             Destroy(instance);
-            return;
-        }
-        //DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -49,22 +51,38 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<Collider2D>();
 
     }
-    private void Update()
+    void Update()
     {
-        
-        dir = 0;
+        dir = Vector3.zero;
         if (Keyboard.current.aKey.isPressed)
-            dir += -1;
+            dir += Vector3.left;
         if (Keyboard.current.dKey.isPressed)
-            dir += 1;
+            dir += Vector3.right;
 
         GroundCheck();
+        //Flip();
 
         if (Keyboard.current.spaceKey.isPressed)
         {
             Jump();
         }
     }
+    private void FixedUpdate()
+    {
+       
+        if (isGround)
+        {
+            rb.linearVelocity = new Vector2(dir.x * moveSpeed, rb.linearVelocity.y);
+        }
+        else
+        {
+            float js = dir.x * moveSpeed;
+            float newJp = Mathf.MoveTowards(rb.linearVelocity.x, js, moveSpeed * jumpSpeed * Time.fixedDeltaTime * 10f);
+            rb.linearVelocity = new Vector2(newJp, rb.linearVelocity.y);
+
+        }
+    }
+    
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -72,7 +90,7 @@ public class PlayerController : MonoBehaviour
         {
 
             cm.coinCount++;
-            Debug.Log("∏‘¿Ω");
+            Debug.Log("Î®πÏùå");
             Destroy(collision.gameObject);
           
             
@@ -104,20 +122,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if(isGround)
-        {
-            rb.linearVelocity = new Vector2(dir * moveSpeed, rb.linearVelocity.y);
-        }
-        else
-        {
-            float js =dir * moveSpeed;
-            float newJp = Mathf.MoveTowards(rb.linearVelocity.x, js, moveSpeed * jumpSpeed * Time.fixedDeltaTime * 10f);
-            rb.linearVelocity =new Vector2(newJp, rb.linearVelocity.y);
-
-        }
-    }
+    
 
     void Jump()
     {
@@ -129,11 +134,14 @@ public class PlayerController : MonoBehaviour
     }
     void GroundCheck()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.3f, Vector2.down, 0.3f, groundLayer);
+        
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.3f, -transform.up, 0.3f, groundLayer);
 
         isGround = hit.collider == null ? false : true;
 
     }
+
+
     private void WhenGround(Transform ground)
     {
         transform.SetParent(ground);
@@ -141,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     public void RespawnMove()
     {
-        dir = 0;
+
         if(rb!=null)
         {
             rb.linearVelocity=Vector2.zero;

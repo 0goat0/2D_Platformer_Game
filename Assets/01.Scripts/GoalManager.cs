@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,7 @@ public class GoalManager : MonoBehaviour
 {
     Collider2D col;
     public CoinManager cm;
+    
 
     void Start()
     {
@@ -13,11 +15,25 @@ public class GoalManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.gameObject.tag == "Player" && cm.coinCount == 6)
         {
-            SceneManager.LoadScene("Stage2");
-            Debug.Log("∞Ò¿Œ");
+            if(SceneManager.GetActiveScene().name == "Stage2")
+            {
+                SceneManager.LoadScene("StartScenes");
+            }
+
+            else
+            {
+                SceneManager.LoadScene("Stage2");
+                Debug.Log("∞Ò¿Œ");
+            }
+            
+
+
+
         }
+
+
     }
 }

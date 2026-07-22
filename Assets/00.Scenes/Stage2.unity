@@ -3144,7 +3144,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -3243,7 +3243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ddaccfc596c6cb408cc5a555a680cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GravityManager
-  gravityScale: 1
+  gravityScale: 5
   center:
   - {fileID: 551382712}
   - {fileID: 540803578}
@@ -3252,9 +3252,9 @@ MonoBehaviour:
   - {fileID: 540969454}
   - {fileID: 2123405716}
   - {fileID: 677972093}
-  closestPlanet: {fileID: 551382712}
-  gravity: 100
-  G: 1
+  closestPlanet: {fileID: 0}
+  gravity: 15
+  G: 0
 --- !u!1 &677972089
 GameObject:
   m_ObjectHideFlags: 0

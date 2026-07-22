@@ -20,7 +20,7 @@ public class GoalManager : MonoBehaviour
         {
             if(SceneManager.GetActiveScene().name == "Stage2")
             {
-                SceneManager.LoadScene("StartScenes");
+                SceneManager.LoadScene("EndScenes");
             }
 
             else

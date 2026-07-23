@@ -1,8 +1,5 @@
 using UnityEngine;
 
-
-
-
 public class GameManager : MonoBehaviour
 {
     Rigidbody2D rb;

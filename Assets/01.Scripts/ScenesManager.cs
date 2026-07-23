@@ -6,23 +6,7 @@ public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager instance;
     public GameObject gameOverUI;
-    //public GameObject gameClearUI;
 
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-            
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
-
-    //}
 
     private void Update()
     {

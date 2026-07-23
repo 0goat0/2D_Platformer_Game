@@ -18,9 +18,4 @@ public class CoinManager : MonoBehaviour
             Destroy(door);
         }
     }
-    //private void FindCoinText()
-    //{
-    //    coinText = FindObjectOfType<TextMeshProUGUI>();
-    //}
-
 }

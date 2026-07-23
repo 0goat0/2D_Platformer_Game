@@ -8,7 +8,6 @@ public class Spine : Obstacle
 
     public int hit = 1;
 
-    private int playerCurrentHeart;
     public HealthManager heartUI;
 
     void Start()

@@ -27,12 +27,6 @@ public class GoalManager : MonoBehaviour
                 SceneManager.LoadScene("Stage2");
                 Debug.Log("∞Ò¿Œ");
             }
-            
-
-
-
         }
-
-
     }
 }

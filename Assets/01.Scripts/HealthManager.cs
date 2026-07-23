@@ -35,10 +35,4 @@ public class HealthManager : MonoBehaviour
             heart = 0;
         }
     }
-
-
-
-
-
-
 }

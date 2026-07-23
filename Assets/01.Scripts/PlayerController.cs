@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField][Range(0f, 1f)] float jumpSpeed;
 
+    [SerializeField] private SpriteRenderer sprite;
+
 
 
 
@@ -54,12 +56,22 @@ public class PlayerController : MonoBehaviour
 
         dir = Vector3.zero;
         if (Keyboard.current.aKey.isPressed)
+        {
+            Debug.Log("flipx=ture");
             dir += Vector3.left;
+            sprite.flipX = true;
+        }
+            
+        
         if (Keyboard.current.dKey.isPressed)
+        {
+            Debug.Log("flipx=false");
             dir += Vector3.right;
+            sprite.flipX = false;
+        }
+            
 
         GroundCheck();
-        //Flip();
 
         if (Keyboard.current.spaceKey.isPressed)
         {
@@ -84,6 +96,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool(isJump, false);
                 animator.SetBool(isRun, false);
             }
+
             rb.linearVelocity = new Vector2(dir.x * moveSpeed, rb.linearVelocity.y);
         }
         else
@@ -162,6 +175,16 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+        if (collision.gameObject.tag == "Asteroid")
+        {
+            HealthManager.heart = Mathf.Max(0, HealthManager.heart - 1);
+            if (HealthManager.heart <= 0)
+            {
+                GameManager.instance.Die();
+                Destroy(collision.gameObject);
+            }
+        }
+
     }
 
     

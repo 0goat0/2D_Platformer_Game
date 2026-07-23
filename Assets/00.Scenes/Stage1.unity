@@ -12115,6 +12115,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   jumpSpeed: 0.06
+  sprite: {fileID: 2063724790}
 --- !u!50 &2063724789
 Rigidbody2D:
   serializedVersion: 5

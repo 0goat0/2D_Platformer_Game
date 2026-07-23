@@ -6,7 +6,7 @@ public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager instance;
     [SerializeField] List<GameObject> objList=new List<GameObject>();
-    Dictionary<string,Queue<GameObject>>pool = new Dictionary<string,Queue<GameObject>>();
+    Dictionary<string,Queue<GameObject>>pools = new Dictionary<string,Queue<GameObject>>();
 
     int poolCount;
     private void Awake()
@@ -23,7 +23,7 @@ public class ObjectPoolManager : MonoBehaviour
 
         foreach(GameObject obj in objList)
         {
-            pool[obj.name]=new Queue<GameObject>();
+            pools[obj.name]=new Queue<GameObject>();
 
             GameObject parentPool=new GameObject(obj.name);
             parentPool.transform.SetParent(this.transform);
@@ -31,29 +31,40 @@ public class ObjectPoolManager : MonoBehaviour
             for(int i = 0; i < poolCount; i++)
             {
                 GameObject gameObject = Instantiate(obj,parentPool.transform);
-                gameObject.SetActive(true);
-                pool[obj.name].Enqueue(gameObject);
+                gameObject.SetActive(false);
+                pools[obj.name].Enqueue(gameObject);
             }
         }
     }
     public GameObject GetObject(string name)
     {
-        if (!pool.ContainsKey(name))
+        if (!pools.ContainsKey(name))
         {
             return null;
 
         }
-        if(pool[name].Count > 0)
+        if(pools[name].Count > 0)
         {
-            GameObject gameObject=pool[name].Dequeue();
+            GameObject gameObject=pools[name].Dequeue();
             gameObject.SetActive (true);
             return gameObject;
         }
         else
         {
-            GameObject gameObject=Instantiate(objList.Find(obj=>obj.name==name));
-            return gameObject;
+            GameObject go=Instantiate(objList.Find(obj=>obj.name==name));
+            return go;
         }
+    }
+    public void ReturnObject(string name,GameObject go)
+    {
+        if(!pools.ContainsKey(name))
+        {
+            Destroy(go);
+            return;
+        }
+        go.SetActive(false);
+        pools[name].Enqueue (go);
+        
     }
 
     void Update()

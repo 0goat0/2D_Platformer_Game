@@ -8,22 +8,11 @@ public class Spine : Obstacle
 
     public int hit = 1;
 
-    public HealthManager heartUI;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         
     }
-    private void OnTriggerEnter2D(Collider2D collider2D)
-    {
-        if (collider2D.gameObject.tag == "Player")
-        {
-
-        }
-    }
-
-
 
 }

@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip hitClip;
     public AudioClip hitCoin;
     public AudioClip hitHeart;
+    public AudioClip hitPlanetClip;
 
     private AudioSource audioSource;
 
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
         if(instance == null)
             instance = this;
         else
-            Destroy(instance);
+            Destroy(gameObject);
     }
 
     void Start()
@@ -192,7 +193,7 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.instance.Die();
                 Destroy(collision.gameObject);
-                PlaySFX(hitClip);
+                //PlaySFX(hitClip);
             }
         }
 
@@ -230,7 +231,7 @@ public class PlayerController : MonoBehaviour
         }    
     }
 
-    private void PlaySFX(AudioClip audioClip,float volume=1f)
+    public void PlaySFX(AudioClip audioClip,float volume=1f)
     {
         audioSource.clip = audioClip;
         audioSource.Play();

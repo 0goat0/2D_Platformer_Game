@@ -6,7 +6,7 @@ public class Spine : Obstacle
     Rigidbody2D rb;
     Collider2D col;
 
-    public int hit = 1;
+
 
     void Start()
     {

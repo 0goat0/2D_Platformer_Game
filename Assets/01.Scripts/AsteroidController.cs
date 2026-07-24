@@ -8,11 +8,17 @@ public class AsteroidController : MonoBehaviour
     float lifeTime;
     float timer;
 
+    private AudioSource audioSource;
+    public AudioClip hitClip;
+    public AudioClip hitPlanetClip;
+    
+
     void Start()
     {
         lifeTime = 15f;
 
         rb=GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         //GameObject astero= ObjectPoolManager.instance.GetObject("Asteroid");
     }
     private void OnEnable()
@@ -38,12 +44,15 @@ public class AsteroidController : MonoBehaviour
         if(collision.gameObject.tag=="Planet")
         {
             Debug.Log("Planet_collision");
-            Destroy(gameObject);
+            ObjectPoolManager.instance.ReturnObject("Asteroid",this.gameObject);
+            //PlayerController.instance.PlaySFX(hitPlanetClip, 0.01f);
         }
         if(collision.gameObject.tag=="Player")
         {
             Debug.Log("player_collision");
-            Destroy(gameObject);
+            ObjectPoolManager.instance.ReturnObject("Asteroid", this.gameObject);
+            //Destroy(gameObject);
+            PlayerController.instance.PlaySFX(hitClip);
         }
     }
 }

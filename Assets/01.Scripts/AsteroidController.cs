@@ -19,8 +19,6 @@ public class AsteroidController : MonoBehaviour
     {
         timer = 0;
     }
-
-
     void Update()
     {
         timer += Time.deltaTime;
@@ -48,13 +46,4 @@ public class AsteroidController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    // void Die()
-    //{
-    //    ReturnPool();
-    //}
-
-    //void ReturnPool()
-    //{
-    //    ObjectPoolManager.instance.ReturnObject("Asteroid",gameObject);
-    //}
 }

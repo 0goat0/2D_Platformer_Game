@@ -1,7 +1,7 @@
 ﻿using System;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,8 +25,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private SpriteRenderer sprite;
 
+    public AudioClip jumpClip;
+    public AudioClip hitClip;
+    public AudioClip hitCoin;
+    public AudioClip hitHeart;
 
-
+    private AudioSource audioSource;
 
     private Animator animator;
     int isRun;
@@ -38,15 +42,15 @@ public class PlayerController : MonoBehaviour
             instance = this;
         else
             Destroy(instance);
-
-
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
-        animator = GetComponent<Animator>();
     }
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
+        audioSource=GetComponent<AudioSource>();
+
         isRun=Animator.StringToHash("isRun");
         isJump = Animator.StringToHash("isJump");
     }
@@ -73,16 +77,17 @@ public class PlayerController : MonoBehaviour
 
         GroundCheck();
 
-        if (Keyboard.current.spaceKey.isPressed)
-        {
-            Jump();
-        }
 
         
     }
     private void FixedUpdate()
     {
-       
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            Jump();
+        }
+
+
         if (isGround)
         {
             if(dir.x!=0)
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(newJp, rb.linearVelocity.y);
             animator.SetBool(isJump, true);
             animator.SetBool(isRun, false);
-            
+            //PlaySFX(jumpClip);
 
         }
     }
@@ -147,6 +152,7 @@ public class PlayerController : MonoBehaviour
             cm.coinCount++;
             Debug.Log("먹음");
             Destroy(collision.gameObject);
+            PlaySFX(hitCoin,0.3f);
           
             
         }
@@ -156,6 +162,7 @@ public class PlayerController : MonoBehaviour
             {
                 HealthManager.heart++;
                 Destroy(collision.gameObject);
+                PlaySFX(hitHeart,0.3f);
                 //Heal();
             }
             else
@@ -165,10 +172,13 @@ public class PlayerController : MonoBehaviour
         }
         if(collision.gameObject.tag =="Spine")
         {
+            PlaySFX(hitClip);
             HealthManager.heart=Mathf.Max(0,HealthManager.heart-1);
             if(HealthManager.heart <= 0)
             {
+                
                 GameManager.instance.Die();
+                
             }
             else
             {
@@ -182,6 +192,7 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.instance.Die();
                 Destroy(collision.gameObject);
+                PlaySFX(hitClip);
             }
         }
 
@@ -197,6 +208,7 @@ public class PlayerController : MonoBehaviour
             isGround = false;
             animator.SetBool(isJump, true);
             animator.SetBool(isRun, false);
+            PlaySFX(jumpClip, 0.3f);
         }
         
     }
@@ -216,6 +228,12 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity=Vector2.zero;
         }    
+    }
+
+    private void PlaySFX(AudioClip audioClip,float volume=1f)
+    {
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
    
 

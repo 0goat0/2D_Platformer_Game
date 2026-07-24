@@ -5,7 +5,9 @@ using UnityEngine;
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager instance;
+
     [SerializeField] List<GameObject> objList=new List<GameObject>();
+    
     Dictionary<string,Queue<GameObject>>pools = new Dictionary<string,Queue<GameObject>>();
 
     int poolCount;

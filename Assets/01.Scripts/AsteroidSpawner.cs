@@ -13,7 +13,7 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] Color color = new Color(1, 0, 0, 0.5f);
 
     List<GameObject> asteroidList=new List<GameObject>();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   
     void Start()
     {
         

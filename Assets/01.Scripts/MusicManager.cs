@@ -13,7 +13,6 @@ public class MusicManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            audioSource = GetComponent<AudioSource>();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -23,7 +22,8 @@ public class MusicManager : MonoBehaviour
     }
     void Start()
     {
-        if(backgroundMusic == null)
+        audioSource = GetComponent<AudioSource>();
+        if (backgroundMusic == null)
         {
             PlayBackgroundMusic(false,backgroundMusic);
         }

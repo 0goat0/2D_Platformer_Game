@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         if(instance == null)
             instance = this;
+
         else
             Destroy(gameObject);
     }
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         audioSource=GetComponent<AudioSource>();
+        sprite= GetComponent<SpriteRenderer>();
 
         isRun=Animator.StringToHash("isRun");
         isJump = Animator.StringToHash("isJump");
@@ -173,6 +176,7 @@ public class PlayerController : MonoBehaviour
         }
         if(collision.gameObject.tag =="Spine")
         {
+            StartCoroutine(BlinkRed());
             PlaySFX(hitClip);
             HealthManager.heart=Mathf.Max(0,HealthManager.heart-1);
             if(HealthManager.heart <= 0)
@@ -188,6 +192,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.tag == "Asteroid")
         {
+            StartCoroutine(BlinkRed());
             HealthManager.heart = Mathf.Max(0, HealthManager.heart - 1);
             if (HealthManager.heart <= 0)
             {
@@ -198,7 +203,12 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    private IEnumerator BlinkRed()
+    {
+        sprite.color=Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sprite.color = Color.white;
+    }
     
 
     void Jump()

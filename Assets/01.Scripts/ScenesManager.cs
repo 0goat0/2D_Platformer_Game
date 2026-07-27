@@ -8,6 +8,21 @@ public class ScenesManager : MonoBehaviour
     public GameObject gameOverUI;
 
 
+
+    //private void Awake()
+    //{
+    //    if(instance == null)
+    //    {
+    //        instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+       
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+            
+    //}
     private void Update()
     {
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)

@@ -9,20 +9,8 @@ public class ScenesManager : MonoBehaviour
 
 
 
-    //private void Awake()
-    //{
-    //    if(instance == null)
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-       
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-            
-    //}
+
+
     private void Update()
     {
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -74,10 +62,6 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
-    //public void GameClear()
-    //{
-    //    gameClearUI.SetActive(true);
-    //}
 
 
 }

@@ -1750,7 +1750,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: ad787cd9e6ec71543b1e6c4aaca2e2af, type: 3}
+  m_Resource: {fileID: 8300000, guid: 09723245600e5554086ab6568880a96b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8f1c3f9f069364ca1d2111673c9722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicManager
-  backgroundMusic: {fileID: 8300000, guid: ad787cd9e6ec71543b1e6c4aaca2e2af, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: 09723245600e5554086ab6568880a96b, type: 3}
   musicSlider: {fileID: 460252377}
 --- !u!4 &623273439
 Transform:

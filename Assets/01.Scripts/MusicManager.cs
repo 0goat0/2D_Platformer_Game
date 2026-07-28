@@ -3,55 +3,29 @@ using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
-    private static MusicManager instance;
-    private AudioSource audioSource;
-    public AudioClip backgroundMusic;
-    [SerializeField] private Slider musicSlider;
+    public static MusicManager instance;
+    public Slider bgmSlider;
 
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-            
-        }
-        else
-        {
-            Destroy(gameObject);
-            DontDestroyOnLoad(gameObject);
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //        instance = this;
+    //    else
+    //        Destroy(gameObject);
+    //    DontDestroyOnLoad(gameObject);
+    //}
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (backgroundMusic == null)
-        {
-            PlayBackgroundMusic(false,backgroundMusic);
-        }
-        musicSlider.onValueChanged.AddListener(delegate { SetVolume(musicSlider.value); });
+        bgmSlider.onValueChanged.AddListener(BGMVolumeChanged);
     }
-    
-    public static void SetVolume(float volume)
+
+
+    public void BGMVolumeChanged(float vol)
     {
-        instance.audioSource.volume = volume;
+        SoundManager.instance.SetBGMVolume(vol);
     }
-    public void PlayBackgroundMusic(bool restSong,AudioClip audioClip=null)
+    public void SFXVolumeChanged(float vol)
     {
-        if(audioClip != null)
-        {
-            audioSource.clip = audioClip;
-        }
-        if(audioSource != null)
-        {
-            if(restSong)
-            {
-                audioSource.Stop();
-            }
-            audioSource.Play();
-        }        
-    }
-    public void PauseBackgroundMusic()
-    {
-        audioSource.Pause();
+        SoundManager.instance.SetSFXVolume(vol);
     }
 }

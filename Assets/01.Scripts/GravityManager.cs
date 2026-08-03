@@ -45,12 +45,7 @@ public class GravityManager : MonoBehaviour
                     maxGravityForce = forceValue;
                     closestPlanet= center[i];
                 }
-                
-
-
             }
-            
-
         }
         if (closestPlanet != null)
         {
